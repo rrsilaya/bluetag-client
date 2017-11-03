@@ -10,10 +10,11 @@ import SideNav from '../features/sidenav/SideNav';
 class App extends Component {
   render() {
     return (
-      <Split showOnResponsive="both" flex="right">
-        <SideNav />
-        <Main>Hello World</Main>
-      </Split>
+      <Main centered={false}>
+        <Split showOnResponsive="both" flex="right" fixed={true}>
+          <SideNav />
+        </Split>
+      </Main>
     );
   }
 }
