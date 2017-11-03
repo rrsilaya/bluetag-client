@@ -122,7 +122,7 @@ module.exports = {
               
             },
             loader: require.resolve('eslint-loader'),
-          },
+          }
         ],
         include: paths.appSrc,
       },
@@ -196,10 +196,10 @@ module.exports = {
             test: /\.scss$/,
               use: [
                 {
-                  loader: 'file-loader',
-                  options: {
-                    name: '[name].css'
-                  }
+                  loader: 'style-loader'
+                },
+                {
+                  loader: 'css-loader'
                 },
                 {
                   loader: 'sass-loader',
