@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+import Main from 'grommet/components/App';
 import Login from '../features/login/Login';
 
 import './App.css';
@@ -6,9 +8,9 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <div>
+      <Main>
         <Login />
-      </div>
+      </Main>
     );
   }
 }
