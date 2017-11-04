@@ -1,0 +1,7 @@
+.container div {
+  height: calc(100vh - 72px);
+}
+
+.page {
+  overflow-y: scroll;
+}

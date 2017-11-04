@@ -7,3 +7,7 @@ export const getSession = () => {
 export const login = credentials => {
   return axios.post('/api/login', credentials);
 };
+
+export const logout = () => {
+  return axios.post('/api/logout');
+};

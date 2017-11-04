@@ -4,10 +4,9 @@ import Login from './Login';
 import { login } from '../../entities/auth';
 
 const mapStateToProps = state => {
-  const { isLoggingIn, loginError } = state.auth;
+  const { loginError } = state.auth;
 
   return {
-    isLoggingIn,
     loginError
   };
 };

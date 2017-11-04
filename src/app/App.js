@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import Grommet from 'grommet/components/App';
 import {
-  BrowserRouter,
+  BrowserRouter as Router,
   withRouter,
   Switch,
   Route,
   Redirect
 } from 'react-router-dom';
 
+import Split from 'grommet/components/Split';
+import Box from 'grommet/components/Box';
 import Loader from '../features/auth/loader/Loader';
 import Login from '../features/auth/login/LoginContainer';
+import HeaderNav from '../features/headerNav/HeaderNav';
+import Sidebar from '../features/sidebar/Sidebar';
 
 import routes from './routes';
 import './App.css';
@@ -21,7 +25,7 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter history={withRouter}>
+      <Router history={withRouter}>
         <Grommet>
           {this.props.isGettingSession ? (
             <Loader />
@@ -31,10 +35,34 @@ class App extends Component {
               <Redirect to="/" />
             </Switch>
           ) : (
-            <h1>Inside App</h1>
+            <div>
+              <HeaderNav
+                user={this.props.user.username}
+                logout={this.props.handleLogout}
+              />
+              <Split
+                className="container"
+                showOnResponsive="priority"
+                flex="right"
+                fixed>
+                <Sidebar />
+                <Box pad="small" className="page">
+                  <Switch>
+                    {routes.map(
+                      (route, i) =>
+                        route.type === 'route' ? (
+                          <Route {...route} key={i} />
+                        ) : (
+                          <Redirect {...route} key={i} />
+                        )
+                    )}
+                  </Switch>
+                </Box>
+              </Split>
+            </div>
           )}
         </Grommet>
-      </BrowserRouter>
+      </Router>
     );
   }
 }

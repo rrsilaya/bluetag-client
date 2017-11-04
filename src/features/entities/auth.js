@@ -4,6 +4,7 @@ import { handle } from 'redux-pack';
 // Action Types
 const GET_SESSION = 'AUTH/GET_SESSION';
 const LOGIN = 'AUTH/LOGIN';
+const LOGOUT = 'AUTH/LOGOUT';
 
 // Action Creators
 export const getSession = () => {
@@ -24,6 +25,15 @@ export const login = credentials => {
   };
 };
 
+export const logout = () => {
+  return dispatch => {
+    return dispatch({
+      type: LOGOUT,
+      promise: Api.logout()
+    });
+  };
+};
+
 // Initial State
 const initialState = {
   /* Get Session */
@@ -31,7 +41,6 @@ const initialState = {
   isGettingSession: true,
 
   /* Login */
-  isLoggingIn: false,
   loginError: null
 };
 
@@ -60,7 +69,7 @@ const reducer = (state = initialState, action) => {
       return handle(state, action, {
         start: prevState => ({
           ...prevState,
-          isLoggingIn: true
+          isGettingSession: true
         }),
         success: prevState => ({
           ...prevState,
@@ -73,7 +82,23 @@ const reducer = (state = initialState, action) => {
         }),
         finish: prevState => ({
           ...prevState,
-          isLoggingIn: false
+          isGettingSession: false
+        })
+      });
+
+    case LOGOUT:
+      return handle(state, action, {
+        start: prevState => ({
+          ...prevState,
+          isGettingSession: true
+        }),
+        success: prevState => ({
+          ...prevState,
+          user: null
+        }),
+        finish: prevState => ({
+          ...prevState,
+          isGettingSession: false
         })
       });
 
