@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://cdn.pixabay.com/photo/2017/01/10/03/54/icon-1968248_960_720.png" alt="icon" height="220px" />
+  <img src="./src/stylesheets/logo/bt_original.png" alt="icon" width="500px" />
   <br/>
   BlueTag
   <br/>
@@ -18,11 +18,10 @@
 ### Installation
 1. Clone this repository.
 2. Install all the dependencies by running `yarn install`.
-3. Run the web app using `yarn start`.
+3. Start the server at port 3001.
+4. Run the web app using `yarn start`.
 
 ### Developers
 * Afable, Lorenz Matthew
 * Roxas, Harold James
 * Silaya, Ralph Lawrence
-
-> **Disclaimer:** The app icon is temporary only until a proper icon/logo is made for the application.
