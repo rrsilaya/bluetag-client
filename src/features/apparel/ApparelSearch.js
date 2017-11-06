@@ -13,7 +13,7 @@ class ApparelSearch extends Component {
     return (
       <Tiles align="center" fill="true">
         <Tile>
-          <SearchInput placeHolder="Search" />
+          <SearchInput placeHolder="Search" className="searchFull" />
         </Tile>
         <Tile>
           <Select
