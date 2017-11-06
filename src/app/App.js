@@ -26,7 +26,7 @@ class App extends Component {
   render() {
     return (
       <Router history={withRouter}>
-        <Grommet center={false}>
+        <Grommet centered={false}>
           {this.props.isGettingSession ? (
             <Loader />
           ) : !this.props.user ? (

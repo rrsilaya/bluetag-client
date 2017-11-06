@@ -11,7 +11,7 @@ import './style.css';
 class ApparelSearch extends Component {
   render() {
     return (
-      <Tiles>
+      <Tiles align="center" fill="true">
         <Tile>
           <SearchInput placeHolder="Search" />
         </Tile>
