@@ -18,13 +18,13 @@ class Apparel extends Component {
   };
 
   render() {
-    const { apparels, openModal, handleToggleModal } = this.props;
+    const { apparels, infoModal, handleToggleModal } = this.props;
 
     return (
       <div>
         <ApparelSearch />
         <div className="apparelTable">
-          {openModal && <ApparelInfo />}
+          {infoModal && <ApparelInfo />}
           <Table onMore={this.handleLoadMore}>
             <thead>
               <tr>

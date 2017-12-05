@@ -4,12 +4,12 @@ import Apparel from './Apparel';
 import { getApparel, toggleModal } from '../entities/apparel';
 
 const mapStateToProps = state => {
-  const { apparels, page, openModal } = state.apparel;
+  const { apparels, page, infoModal } = state.apparel;
 
   return {
     apparels,
     page,
-    openModal
+    infoModal
   };
 };
 

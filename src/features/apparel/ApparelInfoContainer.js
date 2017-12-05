@@ -1,14 +1,21 @@
 import { connect } from 'react-redux';
 import ApparelInfo from './ApparelInfo';
 
-import { getApparelByID, toggleModal } from '../entities/apparel';
+import {
+  getApparelByID,
+  toggleModal,
+  changeInfo,
+  editApparel,
+  deleteApparel
+} from '../entities/apparel';
 
 const mapStateToProps = state => {
-  const { apparel, activeApparel } = state.apparel;
+  const { apparel, activeApparel, apparelInfo } = state.apparel;
 
   return {
     apparel,
-    activeApparel
+    activeApparel,
+    apparelInfo
   };
 };
 
@@ -19,6 +26,15 @@ const mapDispatchToProps = dispatch => {
     },
     toggleModal: () => {
       dispatch(toggleModal());
+    },
+    handleChangeInfo: (name, value) => {
+      dispatch(changeInfo(name, value));
+    },
+    handleEditApparel: (id, apparelInfo) => {
+      dispatch(editApparel(id, apparelInfo));
+    },
+    handleDeleteApparel: id => {
+      dispatch(deleteApparel(id));
     }
   };
 };
