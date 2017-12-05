@@ -9,32 +9,22 @@ import TableRow from 'grommet/components/TableRow';
 import './style.css';
 
 class Apparel extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      openModal: false
-    };
-  }
-
   componentDidMount() {
     this.props.handleGetApparel(this.props.page);
   }
-
-  handleToggleModal = () => {
-    this.setState({ openModal: !this.state.openModal });
-  };
 
   handleLoadMore = () => {
     this.props.handleGetApparel(this.props.page);
   };
 
   render() {
-    const { apparels } = this.props;
+    const { apparels, openModal, handleToggleModal } = this.props;
 
     return (
       <div>
         <ApparelSearch />
         <div className="apparelTable">
+          {openModal && <ApparelInfo />}
           <Table onMore={this.handleLoadMore}>
             <thead>
               <tr>
@@ -51,13 +41,10 @@ class Apparel extends Component {
             <tbody>
               {apparels.map((apparel, index) => {
                 return (
-                  <TableRow key={index} onClick={this.handleToggleModal}>
-                    {this.state.openModal && (
-                      <ApparelInfo
-                        id={apparel.id}
-                        toggleModal={this.handleToggleModal}
-                      />
-                    )}
+                  <TableRow
+                    key={index}
+                    className="apparel-item"
+                    onClick={() => handleToggleModal(apparel.id)}>
                     <td>{apparel.id}</td>
                     <td>{apparel.brand}</td>
                     <td>{apparel.type}</td>

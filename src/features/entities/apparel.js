@@ -4,6 +4,7 @@ import { handle } from 'redux-pack';
 //Action Types
 const GET_ALL_APPAREL = 'APPAREL/GET_ALL_APPAREL';
 const GET_APPAREL = 'APPAREL/GET_APPAREL';
+const TOGGLE_MODAL = 'APPAREL/TOGGLE_MODAL';
 
 //Action Creators
 export const getApparel = page => {
@@ -16,7 +17,6 @@ export const getApparel = page => {
 };
 
 export const getApparelByID = id => {
-  console.log(id);
   return dispatch => {
     return dispatch({
       type: GET_APPAREL,
@@ -25,10 +25,21 @@ export const getApparelByID = id => {
   };
 };
 
+export const toggleModal = apparel => {
+  return {
+    type: TOGGLE_MODAL,
+    payload: apparel
+  };
+};
+
 //Initial State
 const initialState = {
   apparels: [],
-  apparel: null,
+  apparel: {},
+
+  openModal: false,
+  activeApparel: null,
+
   pages: 1,
   page: 1,
   isGettingApparel: false
@@ -71,6 +82,12 @@ const reducer = (state = initialState, action) => {
           isGettingApparel: false
         })
       });
+    case TOGGLE_MODAL:
+      return {
+        ...state,
+        openModal: !state.openModal,
+        activeApparel: payload
+      };
     default:
       return state;
   }

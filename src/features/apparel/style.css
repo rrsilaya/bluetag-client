@@ -6,3 +6,7 @@
 .searchFull input {
   width: 100% !important;
 }
+
+.apparel-item {
+  cursor: pointer;
+}

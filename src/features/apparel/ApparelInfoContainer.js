@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
 import ApparelInfo from './ApparelInfo';
 
-import { getApparelByID } from '../entities/apparel';
+import { getApparelByID, toggleModal } from '../entities/apparel';
 
 const mapStateToProps = state => {
-  const { apparel } = state.apparel;
+  const { apparel, activeApparel } = state.apparel;
 
   return {
-    apparel
+    apparel,
+    activeApparel
   };
 };
 
@@ -15,6 +16,9 @@ const mapDispatchToProps = dispatch => {
   return {
     handleGetApparelByID: id => {
       dispatch(getApparelByID(id));
+    },
+    toggleModal: () => {
+      dispatch(toggleModal());
     }
   };
 };

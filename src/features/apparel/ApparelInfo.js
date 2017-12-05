@@ -8,15 +8,18 @@ import Heading from 'grommet/components/Heading';
 
 class ApparelInfo extends Component {
   componentDidMount() {
-    this.props.handleGetApparelByID(this.props.id);
+    this.props.handleGetApparelByID(this.props.activeApparel);
   }
+
+  handleToggleModal = () => {
+    this.props.toggleModal();
+  };
 
   render() {
     const { apparel } = this.props;
-    console.log(this.props);
 
     return (
-      <Layer onClose={this.props.toggleModal}>
+      <Layer onClose={this.props.handleToggleModal}>
         <Form>
           <Heading>Apparel Information</Heading>
           <FormField label="ID">
