@@ -1,4 +1,4 @@
-import Apparel from '../features/apparel/Apparel';
+import Apparel from '../features/apparel/ApparelContainer';
 
 const routes = [
   {
