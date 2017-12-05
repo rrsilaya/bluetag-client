@@ -1,5 +1,7 @@
 <h1 align="center">
+  <br />
   <img src="./src/stylesheets/logo/bt_original.png" alt="icon" width="500px" />
+  <br />
   <br/>
   BlueTag
   <br/>

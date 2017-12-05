@@ -26,7 +26,7 @@ class App extends Component {
   render() {
     return (
       <Router history={withRouter}>
-        <Grommet>
+        <Grommet centered={false}>
           {this.props.isGettingSession ? (
             <Loader />
           ) : !this.props.user ? (
@@ -45,7 +45,7 @@ class App extends Component {
                 showOnResponsive="priority"
                 flex="right"
                 fixed>
-                <Sidebar />
+                <Sidebar user={this.props.user.type} />
                 <Box pad="small" className="page">
                   <Switch>
                     {routes.map(

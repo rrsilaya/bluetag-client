@@ -1,4 +1,5 @@
-.container div {
+.container .pages,
+.container .page {
   height: calc(100vh - 72px);
 }
 

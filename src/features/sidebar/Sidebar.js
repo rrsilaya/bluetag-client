@@ -35,18 +35,22 @@ class Sidebar extends Component {
               icon={<CompareIcon />}
               animateIcon={false}
             />
-            <Anchor
-              label="Logs"
-              href="#"
-              icon={<DocumentTimeIcon />}
-              animateIcon={false}
-            />
-            <Anchor
-              label="Employees"
-              href="#"
-              icon={<GroupIcon />}
-              animateIcon={false}
-            />
+            {this.props.user === 'manager'
+              ? [
+                  <Anchor
+                    label="Logs"
+                    href="#"
+                    icon={<DocumentTimeIcon />}
+                    animateIcon={false}
+                  />,
+                  <Anchor
+                    label="Employees"
+                    href="#"
+                    icon={<GroupIcon />}
+                    animateIcon={false}
+                  />
+                ]
+              : ''}
           </Menu>
         </Box>
       </Nav>
