@@ -5,5 +5,5 @@ export const getApparel = page => {
 };
 
 export const getApparelByID = id => {
-  return axios.get(`/api/apparels/${id}`);
+  return axios.get(`/api/apparel/${id}`);
 };

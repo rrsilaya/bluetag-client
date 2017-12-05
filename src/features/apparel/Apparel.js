@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import ApparelSearch from './ApparelSearch';
-import ApparelInfo from './ApparelInfo';
+import ApparelInfo from './ApparelInfoContainer';
 
 import Table from 'grommet/components/Table';
 import TableRow from 'grommet/components/TableRow';
@@ -12,8 +12,7 @@ class Apparel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      openModal: false,
-      selectedId: ''
+      openModal: false
     };
   }
 
@@ -34,9 +33,6 @@ class Apparel extends Component {
 
     return (
       <div>
-        {this.state.openModal && (
-          <ApparelInfo toggleModal={this.handleToggleModal} />
-        )}
         <ApparelSearch />
         <div className="apparelTable">
           <Table onMore={this.handleLoadMore}>
@@ -56,6 +52,12 @@ class Apparel extends Component {
               {apparels.map((apparel, index) => {
                 return (
                   <TableRow key={index} onClick={this.handleToggleModal}>
+                    {this.state.openModal && (
+                      <ApparelInfo
+                        id={apparel.id}
+                        toggleModal={this.handleToggleModal}
+                      />
+                    )}
                     <td>{apparel.id}</td>
                     <td>{apparel.brand}</td>
                     <td>{apparel.type}</td>

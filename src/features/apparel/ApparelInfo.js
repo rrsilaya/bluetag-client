@@ -7,45 +7,44 @@ import TextInput from 'grommet/components/TextInput';
 import Heading from 'grommet/components/Heading';
 
 class ApparelInfo extends Component {
-  // constructor(props){
-  //     super(props);
-  //     this.state = {
-  //         currId: this.props.id
-  //     }
-  // }
+  componentDidMount() {
+    this.props.handleGetApparelByID(this.props.id);
+  }
 
   render() {
+    const { apparel } = this.props;
     console.log(this.props);
+
     return (
       <Layer onClose={this.props.toggleModal}>
         <Form>
           <Heading>Apparel Information</Heading>
           <FormField label="ID">
-            <TextInput />
+            <TextInput name="id" value={apparel.id} />
           </FormField>
           <FormField label="Brand">
-            <TextInput />
+            <TextInput name="brand" value={apparel.brand} />
           </FormField>
           <FormField label="Type">
-            <TextInput />
+            <TextInput name="type" value={apparel.type} />
           </FormField>
           <FormField label="Size">
-            <TextInput />
+            <TextInput name="size" value={apparel.size} />
           </FormField>
           <FormField label="Color">
-            <TextInput />
+            <TextInput name="color" value={apparel.color} />
           </FormField>
           <FormField label="Quantity">
-            <TextInput />
+            <TextInput name="quantity" value={apparel.quantity} />
           </FormField>
           <FormField label="Price">
-            <TextInput />
+            <TextInput name="price" value={apparel.price} />
           </FormField>
           <FormField label="Discount">
-            <TextInput />
+            <TextInput name="discount" value={apparel.discount} />
           </FormField>
           <FormField label="Selling Price">
-            <TextInput />
+            <TextInput name="sellingPrice" value={apparel.sellingPrice} />
           </FormField>
         </Form>
       </Layer>

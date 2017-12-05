@@ -16,6 +16,7 @@ export const getApparel = page => {
 };
 
 export const getApparelByID = id => {
+  console.log(id);
   return dispatch => {
     return dispatch({
       type: GET_APPAREL,
