@@ -4,19 +4,27 @@ import Apparel from './Apparel';
 import { getApparel, toggleModal } from '../entities/apparel';
 
 const mapStateToProps = state => {
-  const { apparels, page, infoModal } = state.apparel;
+  const {
+    apparels,
+    page,
+    infoModal,
+    searchApparel,
+    isGettingApparel
+  } = state.apparel;
 
   return {
     apparels,
     page,
-    infoModal
+    infoModal,
+    searchApparel,
+    isGettingApparel
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleGetApparel: page => {
-      dispatch(getApparel(page));
+    handleGetApparel: (page, search) => {
+      dispatch(getApparel(page, search));
     },
     handleToggleModal: apparel => {
       dispatch(toggleModal(apparel));

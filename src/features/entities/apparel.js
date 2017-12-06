@@ -8,15 +8,38 @@ const EDIT_APPAREL = 'APPAREL/EDIT_APPAREL';
 const DELETE_APAPREL = 'APPAREL/DELETE_APPAREL';
 const CHANGE_FORM = 'APPAREL/CHANGE_FORM';
 const ADD_APPAREL = 'APPAREL/ADD_APPAREL';
+const CHANGE_SEARCH = 'APPAREL/CHANGE_SEARCH';
+const CHANGE_SELECT = 'APPAREL/CHANGE_LABEL';
+const CHANGE_ORDER = 'APPAREL/CHANGE_ORDER';
+const SEARCH_APPAREL = 'APPAREL/SEARCH_APPAREL';
+const FILTER_APPAREL = 'APPAREL/FILTER_APPAREL';
 const TOGGLE_MODAL = 'APPAREL/TOGGLE_MODAL';
 const CHANGE_INFO = 'APPAREL/CHANGE_INFO';
 
 //Action Creators
-export const getApparel = page => {
+export const getApparel = (page, search) => {
   return dispatch => {
     return dispatch({
       type: GET_ALL_APPAREL,
-      promise: Api.getApparel(page)
+      promise: Api.getApparel(page, search)
+    });
+  };
+};
+
+export const searchApparel = (page, search) => {
+  return dispatch => {
+    return dispatch({
+      type: SEARCH_APPAREL,
+      promise: Api.getApparel(page, search)
+    });
+  };
+};
+
+export const filterApparel = (page, search) => {
+  return dispatch => {
+    return dispatch({
+      type: FILTER_APPAREL,
+      promise: Api.getApparel(page, search)
     });
   };
 };
@@ -54,6 +77,30 @@ export const addApparel = apparel => {
       type: ADD_APPAREL,
       promise: Api.addApparel(apparel)
     });
+  };
+};
+
+export const changeSearch = value => {
+  return {
+    type: CHANGE_SEARCH,
+    payload: value
+  };
+};
+
+export const changeOrder = value => {
+  return {
+    type: CHANGE_ORDER,
+    payload: value
+  };
+};
+
+export const changeSelect = (name, value) => {
+  return {
+    type: CHANGE_SELECT,
+    payload: {
+      name,
+      value
+    }
   };
 };
 
@@ -98,6 +145,13 @@ const initialState = {
     price: ''
   },
 
+  searchApparel: {
+    label: 'id',
+    q: '',
+    category: 'brand',
+    order: 'asc'
+  },
+
   infoModal: false,
   activeApparel: null,
   apparelInfo: {
@@ -126,13 +180,58 @@ const reducer = (state = initialState, action) => {
         success: prevState => ({
           ...prevState,
           apparels: [...state.apparels, ...payload.data.data.apparel],
-          page: payload.data.data.page,
+          page: state.page + 1,
           pages: payload.data.data.pages
         }),
         finish: prevState => ({
           ...prevState,
-          isGettingApparel: false,
-          page: state.page + 1
+          isGettingApparel: false
+        })
+      });
+    case SEARCH_APPAREL:
+      return handle(state, action, {
+        start: prevState => ({
+          ...prevState,
+          isGettingApparel: true,
+          page: 1,
+          searchApparel: {
+            ...state.searchApparel,
+            category: 'brand',
+            order: 'asc'
+          }
+        }),
+        success: prevState => ({
+          ...prevState,
+          apparels: state.apparels.filter(
+            apparel => payload.data.data.apparel === apparel
+          )
+        }),
+        finish: prevState => ({
+          ...prevState,
+          isGettingApparel: false
+        })
+      });
+    case FILTER_APPAREL:
+      return handle(state, action, {
+        start: prevState => ({
+          ...prevState,
+          isGettingApparel: true,
+          page: 1,
+          searchApparel: {
+            ...state.searchApparel,
+            q: '',
+            label: 'id'
+          }
+        }),
+        success: prevState => ({
+          ...prevState,
+          apparels: state.apparels.filter(
+            apparel => payload.data.data.apparel === apparel
+          )
+        }),
+        finish: prevState => ({
+          ...prevState,
+          isGettingApparel: false
         })
       });
     case GET_APPAREL:
@@ -172,6 +271,30 @@ const reducer = (state = initialState, action) => {
           isGettingApparel: false
         })
       });
+    case CHANGE_SEARCH:
+      return {
+        ...state,
+        searchApparel: {
+          ...state.searchApparel,
+          q: payload
+        }
+      };
+    case CHANGE_SELECT:
+      return {
+        ...state,
+        searchApparel: {
+          ...state.searchApparel,
+          [payload.name]: payload.value
+        }
+      };
+    case CHANGE_ORDER:
+      return {
+        ...state,
+        searchApparel: {
+          ...state.searchApparel,
+          order: payload
+        }
+      };
     case CHANGE_FORM:
       return {
         ...state,

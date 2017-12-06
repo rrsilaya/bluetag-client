@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import ApparelSearch from './ApparelSearch';
+import ApparelSearch from './ApparelSearchContainer';
 import ApparelInfo from './ApparelInfoContainer';
 
 import Table from 'grommet/components/Table';
@@ -10,11 +10,11 @@ import './style.css';
 
 class Apparel extends Component {
   componentDidMount() {
-    this.props.handleGetApparel(this.props.page);
+    this.props.handleGetApparel(this.props.page, this.props.searchApparel);
   }
 
   handleLoadMore = () => {
-    this.props.handleGetApparel(this.props.page);
+    this.props.handleGetApparel(this.props.page, this.props.searchApparel);
   };
 
   render() {

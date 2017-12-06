@@ -6,9 +6,11 @@ import Tiles from 'grommet/components/Tiles';
 import Tile from 'grommet/components/Tile';
 import SearchInput from 'grommet/components/SearchInput';
 import Select from 'grommet/components/Select';
-import Sort from 'grommet-addons/components/Sort';
+import Form from 'grommet/components/Form';
 import Button from 'grommet/components/Button';
 import AddIcon from 'grommet/components/icons/base/Add';
+import LinkUpIcon from 'grommet/components/icons/base/LinkUp';
+import LinkDownIcon from 'grommet/components/icons/base/LinkDown';
 
 import './style.css';
 
@@ -24,48 +26,87 @@ class ApparelSearch extends Component {
     this.setState({ showModal: !this.state.showModal });
   };
 
+  handleChangeSearch = e => {
+    this.props.handleChangeSearch(e.target.value);
+  };
+
+  handleChangeSelect = e => {
+    this.props.handleChangeSelect(e.target.name, e.option.value);
+  };
+
+  handleSearchApparel = e => {
+    e.preventDefault();
+    this.props.handleSearchApparel(this.props.page, this.props.searchApparel);
+  };
+
+  handleFilterApparel = e => {
+    this.props.handleChangeSelect(e.target.name, e.option.value);
+    this.props.handleFilterApparel(this.props.page, this.props.searchApparel);
+  };
+
   render() {
+    const { searchApparel, page } = this.props;
+
     return (
       <Tiles align="center" fill="true">
         {this.state.showModal && (
           <AddApparel toggleModal={this.handleToggleModal} />
         )}
         <Tile>
-          <SearchInput placeHolder="Search" className="searchFull" />
+          <Form onSubmit={this.handleSearchApparel}>
+            <SearchInput
+              name="q"
+              value={searchApparel.q}
+              placeHolder="Search"
+              className="searchFull"
+              onDOMChange={this.handleChangeSearch}
+            />
+          </Form>
         </Tile>
         <Tile>
           <Select
             options={[
-              'ID',
-              'Brand',
-              'Type',
-              'Size',
-              'Color',
-              'Price',
-              'Selling Price'
+              { label: 'ID', value: 'id' },
+              { label: 'Brand', value: 'brand' },
+              { label: 'Type', value: 'type' },
+              { label: 'Size', value: 'size' },
+              { label: 'Color', value: 'color' },
+              { label: 'Price', value: 'price' },
+              { label: 'Selling Price', value: 'sellingPrice' }
             ]}
-            value="ID"
+            value={searchApparel.label}
+            name="label"
+            onChange={this.handleChangeSelect}
           />
         </Tile>
-        <Tile>
-          <Sort
+        <Tile direction="row">
+          <Select
             options={[
-              { label: 'ID', value: 'id', direction: 'asc' },
-              { label: 'Brand', value: 'brand', direction: 'asc' },
-              { label: 'Type', value: 'type', direction: 'asc' },
-              { label: 'Size', value: 'size', direction: 'asc' },
-              { label: 'Color', value: 'color', direction: 'asc' },
-              { label: 'Quantity', value: 'quantity', direction: 'asc' },
-              { label: 'Price', value: 'price', direction: 'asc' },
-              { label: 'Discount', value: 'discount', direction: 'asc' },
-              {
-                label: 'Selling Price',
-                value: 'sellingprice',
-                direction: 'asc'
-              }
+              { label: 'ID', value: 'id' },
+              { label: 'Brand', value: 'brand' },
+              { label: 'Type', value: 'type' },
+              { label: 'Size', value: 'size' },
+              { label: 'Color', value: 'color' },
+              { label: 'Price', value: 'price' },
+              { label: 'Selling Price', value: 'sellingprice' }
             ]}
-            value="brand"
-            direction="asc"
+            value={searchApparel.category}
+            name="category"
+            onChange={this.handleFilterApparel}
+          />
+          <Button
+            icon={<LinkUpIcon />}
+            onClick={e => {
+              this.props.handleChangeOrder('asc');
+              this.props.handleFilterApparel(page, searchApparel);
+            }}
+          />
+          <Button
+            icon={<LinkDownIcon />}
+            onClick={e => {
+              this.props.handleChangeOrder('desc');
+              this.props.handleFilterApparel(page, searchApparel);
+            }}
           />
         </Tile>
         <Tile>

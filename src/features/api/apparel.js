@@ -1,7 +1,9 @@
 import axios from 'axios';
 
-export const getApparel = page => {
-  return axios.get(`/api/apparels/${page}`);
+export const getApparel = (page, search) => {
+  return axios.get(
+    `/api/apparels/${page}?label=${search.label}&q=${search.q}&category=${search.category}&order=${search.order}`
+  );
 };
 
 export const getApparelByID = id => {

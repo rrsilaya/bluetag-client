@@ -69,7 +69,7 @@ class ApparelInfo extends Component {
 
   handleDeleteApparel = () => {
     this.props.handleDeleteApparel(this.props.activeApparel);
-    this.toggleModal();
+    this.props.toggleModal();
   };
 
   render() {
