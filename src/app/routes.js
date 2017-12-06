@@ -1,6 +1,6 @@
-import Apparel from '../features/apparel/Apparel';
 import Dashboard from '../features/dashboard/DashboardContainer';
 import Orders from '../features/order/OrdersContainer';
+import Apparel from '../features/apparel/ApparelContainer';
 
 const routes = [
   {

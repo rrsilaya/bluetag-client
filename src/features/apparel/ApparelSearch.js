@@ -1,23 +1,42 @@
 import React, { Component } from 'react';
 
+import AddApparel from './ApparelAddContainer';
+
 import Tiles from 'grommet/components/Tiles';
 import Tile from 'grommet/components/Tile';
 import SearchInput from 'grommet/components/SearchInput';
 import Select from 'grommet/components/Select';
 import Sort from 'grommet-addons/components/Sort';
+import Button from 'grommet/components/Button';
+import AddIcon from 'grommet/components/icons/base/Add';
 
 import './style.css';
 
 class ApparelSearch extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showModal: false
+    };
+  }
+
+  handleToggleModal = () => {
+    this.setState({ showModal: !this.state.showModal });
+  };
+
   render() {
     return (
       <Tiles align="center" fill="true">
+        {this.state.showModal && (
+          <AddApparel toggleModal={this.handleToggleModal} />
+        )}
         <Tile>
           <SearchInput placeHolder="Search" className="searchFull" />
         </Tile>
         <Tile>
           <Select
             options={[
+              'ID',
               'Brand',
               'Type',
               'Size',
@@ -25,7 +44,7 @@ class ApparelSearch extends Component {
               'Price',
               'Selling Price'
             ]}
-            value="Brand"
+            value="ID"
           />
         </Tile>
         <Tile>
@@ -48,6 +67,11 @@ class ApparelSearch extends Component {
             value="brand"
             direction="asc"
           />
+        </Tile>
+        <Tile>
+          <Button onClick={this.handleToggleModal}>
+            <AddIcon />
+          </Button>
         </Tile>
       </Tiles>
     );
