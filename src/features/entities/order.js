@@ -82,11 +82,6 @@ const initialState = {
   order: {},
   isGettingOrder: false,
 
-  // Edit order
-  orderInfo: {
-    status: '',
-    company: ''
-  },
   isEditingOrder: false,
 
   // Delete order
@@ -127,11 +122,7 @@ const reducer = (state = initialState, action) => {
         }),
         success: prevState => ({
           ...prevState,
-          order: payload.data.data,
-          orderInfo: {
-            status: payload.data.data.status,
-            company: payload.data.data.company
-          }
+          order: payload.data.data
         }),
         finish: prevState => ({
           ...prevState,
@@ -156,8 +147,8 @@ const reducer = (state = initialState, action) => {
     case FORM_CHANGE:
       return {
         ...state,
-        orderInfo: {
-          ...state.orderInfo,
+        order: {
+          ...state.order,
           [payload.name]: payload.option
         }
       };

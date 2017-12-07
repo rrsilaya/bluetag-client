@@ -48,19 +48,17 @@ class OrderInfo extends Component {
   };
 
   handleFormChange = e => {
-    console.log(e.option);
     this.props.handleFormChange(e.target.name, e.option);
   };
 
   handleEditOrder = e => {
     e.preventDefault();
-    this.props.handleEditOrder(this.props.order.id, this.props.orderInfo);
+    this.props.handleEditOrder(this.props.order.id, this.props.order);
   };
 
   render() {
     const {
       order,
-      orderInfo,
       showDeleteModal,
       isGettingOrder,
       isDeletingOrder,
@@ -87,7 +85,7 @@ class OrderInfo extends Component {
               <FormField label="Company">
                 <TextInput
                   name="company"
-                  value={orderInfo.company}
+                  value={order.company}
                   onDOMChange={this.handleFormChange}
                 />
               </FormField>
@@ -96,7 +94,7 @@ class OrderInfo extends Component {
                   name="status"
                   placeHolder="None"
                   options={['delivered', 'cancelled', 'pending']}
-                  value={orderInfo.status}
+                  value={order.status}
                   onChange={this.handleFormChange}
                 />
               </FormField>
