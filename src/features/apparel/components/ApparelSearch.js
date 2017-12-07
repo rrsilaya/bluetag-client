@@ -37,6 +37,14 @@ class ApparelSearch extends Component {
     this.props.handleFilterApparel(this.props.page, this.props.searchApparel);
   };
 
+  handleFilterClassification = e => {
+    this.props.handleChangeSelect(e.target.name, e.option.value);
+    this.props.handleFilterClassification(
+      this.props.page,
+      this.props.searchApparel
+    );
+  };
+
   render() {
     const { searchApparel, page, addModal } = this.props;
 
@@ -44,7 +52,7 @@ class ApparelSearch extends Component {
       <Tiles align="center" fill={true}>
         {addModal && <AddApparel toggleModal={this.handleToggleModal} />}
         <Tile>
-          <Form onSubmit={this.handleSearchApparel}>
+          <Form compact onSubmit={this.handleSearchApparel}>
             <SearchInput
               name="q"
               value={searchApparel.q}
@@ -71,6 +79,16 @@ class ApparelSearch extends Component {
           />
         </Tile>
         <Tile direction="row">
+          <Select
+            options={[
+              { label: 'Fast-moving', value: 'fast' },
+              { label: 'Slow-moving', value: 'slow' },
+              { label: 'Disposal', value: 'disposal' }
+            ]}
+            value={searchApparel.classification}
+            name="classification"
+            onChange={this.handleFilterClassification}
+          />
           <Select
             options={[
               { label: 'ID', value: 'id' },

@@ -7,6 +7,7 @@ const mapStateToProps = state => {
   const {
     apparels,
     page,
+    pages,
     infoModal,
     searchApparel,
     isGettingApparel
@@ -15,6 +16,7 @@ const mapStateToProps = state => {
   return {
     apparels,
     page,
+    pages,
     infoModal,
     searchApparel,
     isGettingApparel

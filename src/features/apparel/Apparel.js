@@ -14,7 +14,9 @@ class Apparel extends Component {
   }
 
   handleLoadMore = () => {
-    this.props.handleGetApparel(this.props.page, this.props.searchApparel);
+    if (this.props.page <= this.props.pages) {
+      this.props.handleGetApparel(this.props.page, this.props.searchApparel);
+    }
   };
 
   render() {

@@ -10,6 +10,7 @@ import {
   confirmDelete
 } from '../../entities/apparel';
 
+import { getDiscounts } from '../../entities/discount';
 import { getStocks } from '../../entities/stock';
 import { getSales } from '../../entities/sale';
 
@@ -43,6 +44,9 @@ const mapDispatchToProps = dispatch => {
     },
     handleDeleteApparel: id => {
       dispatch(deleteApparel(id));
+    },
+    handleGetDiscounts: apparel => {
+      dispatch(getDiscounts(apparel));
     },
     handleGetStocks: apparel => {
       dispatch(getStocks(apparel));

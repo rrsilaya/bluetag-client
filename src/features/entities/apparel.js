@@ -13,6 +13,7 @@ const ADD_APPAREL = 'APPAREL/ADD_APPAREL';
 const CHANGE_SEARCH = 'APPAREL/CHANGE_SEARCH';
 const CHANGE_SELECT = 'APPAREL/CHANGE_LABEL';
 const CHANGE_ORDER = 'APPAREL/CHANGE_ORDER';
+const FILTER_CLASSIFICATION = 'APPAREL/FILTER_CLASSIFICATION';
 const SEARCH_APPAREL = 'APPAREL/SEARCH_APPAREL';
 const FILTER_APPAREL = 'APPAREL/FILTER_APPAREL';
 const TOGGLE_MODAL = 'APPAREL/TOGGLE_MODAL';
@@ -41,6 +42,15 @@ export const filterApparel = (page, search) => {
   return dispatch => {
     return dispatch({
       type: FILTER_APPAREL,
+      promise: Api.getApparel(page, search)
+    });
+  };
+};
+
+export const filterClassification = (page, search) => {
+  return dispatch => {
+    return dispatch({
+      type: FILTER_CLASSIFICATION,
       promise: Api.getApparel(page, search)
     });
   };
@@ -165,6 +175,7 @@ const initialState = {
   searchApparel: {
     label: 'id',
     q: '',
+    classification: '',
     category: 'brand',
     order: 'asc'
   },
@@ -216,7 +227,8 @@ const reducer = (state = initialState, action) => {
           searchApparel: {
             ...state.searchApparel,
             category: 'brand',
-            order: 'asc'
+            order: 'asc',
+            classification: ''
           }
         }),
         success: prevState => ({
@@ -239,7 +251,33 @@ const reducer = (state = initialState, action) => {
           searchApparel: {
             ...state.searchApparel,
             q: '',
-            label: 'id'
+            label: 'id',
+            classification: ''
+          }
+        }),
+        success: prevState => ({
+          ...prevState,
+          apparels: state.apparels.filter(
+            apparel => payload.data.data.apparel === apparel
+          )
+        }),
+        finish: prevState => ({
+          ...prevState,
+          isGettingApparel: false
+        })
+      });
+    case FILTER_CLASSIFICATION:
+      return handle(state, action, {
+        start: prevState => ({
+          ...prevState,
+          isGettingApparel: true,
+          page: 1,
+          searchApparel: {
+            ...state.searchApparel,
+            q: '',
+            label: 'id',
+            category: 'brand',
+            order: 'asc'
           }
         }),
         success: prevState => ({

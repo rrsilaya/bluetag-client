@@ -7,6 +7,7 @@ import {
   changeOrder,
   searchApparel,
   filterApparel,
+  filterClassification,
   toggleAdd
 } from '../../entities/apparel';
 
@@ -36,6 +37,9 @@ const mapDispatchToProps = dispatch => {
     },
     handleFilterApparel: (page, search) => {
       dispatch(filterApparel(page, search));
+    },
+    handleFilterClassification: (page, search) => {
+      dispatch(filterClassification(page, search));
     },
     handleToggleAdd: () => {
       dispatch(toggleAdd());

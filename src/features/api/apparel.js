@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const getApparel = (page, search) => {
   return axios.get(
-    `/api/apparels/${page}?label=${search.label}&q=${search.q}&category=${search.category}&order=${search.order}`
+    `/api/apparels/${page}?label=${search.label}&q=${search.q}&classification=${search.classification}&category=${search.category}&order=${search.order}`
   );
 };
 
