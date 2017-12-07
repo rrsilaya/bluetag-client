@@ -32,14 +32,14 @@ class Orders extends Component {
   };
 
   render() {
-    const { orders, showModal, handleToggleModal } = this.props;
+    const { page, pages, orders, showModal, handleToggleModal } = this.props;
     return (
       <div>
         <h2>Orders</h2>
         <OrderSearch />
         <div className="orderTable">
           {showModal && <OrderInfo />}
-          <Table onMore={this.handleLoadMore}>
+          <Table onMore={page === pages ? false : this.handleLoadMore}>
             <TableHeader
               labels={['Company', 'Order ID', 'Order Status', 'Timestamp']}
             />
