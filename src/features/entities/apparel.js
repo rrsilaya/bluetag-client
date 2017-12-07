@@ -6,7 +6,9 @@ const GET_ALL_APPAREL = 'APPAREL/GET_ALL_APPAREL';
 const GET_APPAREL = 'APPAREL/GET_APPAREL';
 const EDIT_APPAREL = 'APPAREL/EDIT_APPAREL';
 const DELETE_APAPREL = 'APPAREL/DELETE_APPAREL';
+const CONFIRM_DELETE = 'APPAREL/CONFIRM_DELETE';
 const CHANGE_FORM = 'APPAREL/CHANGE_FORM';
+const TOGGLE_ADD = 'APPAREL/TOGGLE_ADD';
 const ADD_APPAREL = 'APPAREL/ADD_APPAREL';
 const CHANGE_SEARCH = 'APPAREL/CHANGE_SEARCH';
 const CHANGE_SELECT = 'APPAREL/CHANGE_LABEL';
@@ -114,6 +116,20 @@ export const changeForm = (name, value) => {
   };
 };
 
+export const toggleAdd = () => {
+  return {
+    type: TOGGLE_ADD,
+    payload: null
+  };
+};
+
+export const confirmDelete = () => {
+  return {
+    type: CONFIRM_DELETE,
+    payload: null
+  };
+};
+
 export const toggleModal = apparel => {
   return {
     type: TOGGLE_MODAL,
@@ -136,6 +152,7 @@ const initialState = {
   apparels: [],
   apparel: {},
 
+  addModal: false,
   newApparel: {
     id: '',
     brand: '',
@@ -161,6 +178,8 @@ const initialState = {
     color: '',
     price: ''
   },
+
+  confirmDelete: false,
 
   pages: 1,
   page: 1,
@@ -268,9 +287,20 @@ const reducer = (state = initialState, action) => {
         }),
         finish: prevState => ({
           ...prevState,
-          isGettingApparel: false
+          isGettingApparel: false,
+          infoModal: false
         })
       });
+    case ADD_APPAREL:
+      return {
+        ...state,
+        addModal: false
+      };
+    case DELETE_APAPREL:
+      return {
+        ...state,
+        infoModal: false
+      };
     case CHANGE_SEARCH:
       return {
         ...state,
@@ -302,6 +332,16 @@ const reducer = (state = initialState, action) => {
           ...state.newApparel,
           [payload.name]: payload.value
         }
+      };
+    case TOGGLE_ADD:
+      return {
+        ...state,
+        addModal: !state.addModal
+      };
+    case CONFIRM_DELETE:
+      return {
+        ...state,
+        confirmDelete: !state.confirmDelete
       };
     case TOGGLE_MODAL:
       return {

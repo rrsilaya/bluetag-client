@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import ApparelAdd from './ApparelAdd';
 
-import { changeForm, addApparel } from '../entities/apparel';
+import { changeForm, addApparel } from '../../entities/apparel';
 
 const mapStateToProps = state => {
   const { newApparel } = state.apparel;

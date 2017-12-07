@@ -6,16 +6,20 @@ import {
   toggleModal,
   changeInfo,
   editApparel,
-  deleteApparel
-} from '../entities/apparel';
+  deleteApparel,
+  confirmDelete
+} from '../../entities/apparel';
+
+import { getStocks } from '../../entities/stock';
 
 const mapStateToProps = state => {
-  const { apparel, activeApparel, apparelInfo } = state.apparel;
+  const { apparel, activeApparel, apparelInfo, confirmDelete } = state.apparel;
 
   return {
     apparel,
     activeApparel,
-    apparelInfo
+    apparelInfo,
+    confirmDelete
   };
 };
 
@@ -33,8 +37,14 @@ const mapDispatchToProps = dispatch => {
     handleEditApparel: (id, apparelInfo) => {
       dispatch(editApparel(id, apparelInfo));
     },
+    handleConfirmDelete: () => {
+      dispatch(confirmDelete());
+    },
     handleDeleteApparel: id => {
       dispatch(deleteApparel(id));
+    },
+    handleGetStocks: apparel => {
+      dispatch(getStocks(apparel));
     }
   };
 };

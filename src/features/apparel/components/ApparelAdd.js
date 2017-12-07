@@ -16,7 +16,6 @@ class AddApparel extends Component {
   handleAddApparel = e => {
     e.preventDefault();
     this.props.handleAddApparel(this.props.newApparel);
-    this.props.toggleModal();
   };
 
   render() {

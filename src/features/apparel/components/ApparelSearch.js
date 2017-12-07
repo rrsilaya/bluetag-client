@@ -12,18 +12,11 @@ import AddIcon from 'grommet/components/icons/base/Add';
 import LinkUpIcon from 'grommet/components/icons/base/LinkUp';
 import LinkDownIcon from 'grommet/components/icons/base/LinkDown';
 
-import './style.css';
+import '../style.css';
 
 class ApparelSearch extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showModal: false
-    };
-  }
-
   handleToggleModal = () => {
-    this.setState({ showModal: !this.state.showModal });
+    this.props.handleToggleAdd();
   };
 
   handleChangeSearch = e => {
@@ -45,13 +38,11 @@ class ApparelSearch extends Component {
   };
 
   render() {
-    const { searchApparel, page } = this.props;
+    const { searchApparel, page, addModal } = this.props;
 
     return (
-      <Tiles align="center" fill="true">
-        {this.state.showModal && (
-          <AddApparel toggleModal={this.handleToggleModal} />
-        )}
+      <Tiles align="center" fill={true}>
+        {addModal && <AddApparel toggleModal={this.handleToggleModal} />}
         <Tile>
           <Form onSubmit={this.handleSearchApparel}>
             <SearchInput

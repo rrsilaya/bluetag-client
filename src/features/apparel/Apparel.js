@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import ApparelSearch from './ApparelSearchContainer';
-import ApparelInfo from './ApparelInfoContainer';
+import ApparelSearch from './components/ApparelSearchContainer';
+import ApparelInfo from './components/ApparelInfoContainer';
 
 import Table from 'grommet/components/Table';
 import TableRow from 'grommet/components/TableRow';
@@ -51,8 +51,18 @@ class Apparel extends Component {
                     <td>{apparel.size}</td>
                     <td>{apparel.color}</td>
                     <td>{apparel.qty}</td>
-                    <td>{apparel.price}</td>
-                    <td>{apparel.sellingPrice}</td>
+                    <td>
+                      {apparel.price.toLocaleString('en-PH', {
+                        style: 'currency',
+                        currency: 'Php'
+                      })}
+                    </td>
+                    <td>
+                      {apparel.sellingPrice.toLocaleString('en-PH', {
+                        style: 'currency',
+                        currency: 'Php'
+                      })}
+                    </td>
                   </TableRow>
                 );
               })}

@@ -6,15 +6,17 @@ import {
   changeSelect,
   changeOrder,
   searchApparel,
-  filterApparel
-} from '../entities/apparel';
+  filterApparel,
+  toggleAdd
+} from '../../entities/apparel';
 
 const mapStateToProps = state => {
-  const { searchApparel, page } = state.apparel;
+  const { searchApparel, page, addModal } = state.apparel;
 
   return {
     searchApparel,
-    page
+    page,
+    addModal
   };
 };
 
@@ -34,6 +36,9 @@ const mapDispatchToProps = dispatch => {
     },
     handleFilterApparel: (page, search) => {
       dispatch(filterApparel(page, search));
+    },
+    handleToggleAdd: () => {
+      dispatch(toggleAdd());
     }
   };
 };
