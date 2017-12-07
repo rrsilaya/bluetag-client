@@ -15,7 +15,13 @@ export const getStatistics = () => {
 };
 
 const initialState = {
-  statistics: null,
+  statistics: {
+    statistics: [],
+    fastMovingItems: 0,
+    slowMovingItems: 0,
+    disposalItems: 0,
+    discountedItems: 0
+  },
   isGettingStatistics: false
 };
 
