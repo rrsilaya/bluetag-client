@@ -42,12 +42,6 @@ class Sidebar extends Component {
                     path={{ path: '/log', index: true }}
                     icon={<DocumentTimeIcon />}
                     animateIcon={false}
-                  />,
-                  <Anchor
-                    label="Employees"
-                    href="#"
-                    icon={<GroupIcon />}
-                    animateIcon={false}
                   />
                 ]
               : ''}

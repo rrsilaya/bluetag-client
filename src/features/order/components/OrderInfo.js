@@ -13,7 +13,7 @@ import Select from 'grommet/components/Select';
 
 import Loader from '../../Loader';
 
-const ConfirmDelete = ({ toggleDelete, deleteApparel }) => {
+const ConfirmDelete = ({ toggleDelete, deleteOrder }) => {
   return (
     <Layer>
       <Heading>Delete Apparel</Heading>
@@ -24,7 +24,7 @@ const ConfirmDelete = ({ toggleDelete, deleteApparel }) => {
           box
           pad="small"
           colorIndex="critical"
-          onClick={deleteApparel}
+          onClick={deleteOrder}
         />
         <Button
           label="Cancel"
@@ -48,19 +48,28 @@ class OrderInfo extends Component {
   };
 
   handleFormChange = e => {
-    console.log(e.option);
-    this.props.handleFormChange(e.target.name, e.option);
+    if (e.target.name === 'status') {
+      this.props.handleFormChange(e.target.name, e.option);
+    } else this.props.handleFormChange(e.target.name, e.target.value);
   };
 
   handleEditOrder = e => {
     e.preventDefault();
-    this.props.handleEditOrder(this.props.order.id, this.props.orderInfo);
+    this.props.handleEditOrder(this.props.order.id, this.props.order);
+  };
+
+  handleConfirmDelete = () => {
+    this.props.handleToggleDeleteModal();
+  };
+
+  handleDeleteOrder = () => {
+    this.props.handleDeleteOrder(this.props.order.id);
+    this.props.handleToggleModal();
   };
 
   render() {
     const {
       order,
-      orderInfo,
       showDeleteModal,
       isGettingOrder,
       isDeletingOrder,
@@ -69,9 +78,9 @@ class OrderInfo extends Component {
 
     return (
       <Layer closer onClose={this.handleToggleModal}>
-        {this.props.showDeleteModal && (
+        {showDeleteModal && (
           <ConfirmDelete
-            deleteApparel={this.handleDeleteApparel}
+            deleteOrder={this.handleDeleteOrder}
             toggleDelete={this.handleConfirmDelete}
           />
         )}
@@ -82,12 +91,12 @@ class OrderInfo extends Component {
           ) : (
             <div>
               <FormField label="ID">
-                <TextInput name="id" value={order.id} />
+                <TextInput name="id" value={order.id} disabled />
               </FormField>
               <FormField label="Company">
                 <TextInput
                   name="company"
-                  value={orderInfo.company}
+                  value={order.company}
                   onDOMChange={this.handleFormChange}
                 />
               </FormField>
@@ -96,7 +105,7 @@ class OrderInfo extends Component {
                   name="status"
                   placeHolder="None"
                   options={['delivered', 'cancelled', 'pending']}
-                  value={orderInfo.status}
+                  value={order.status}
                   onChange={this.handleFormChange}
                 />
               </FormField>

@@ -4,20 +4,29 @@ import Logs from './Logs';
 import { getLogs } from '../entities/log';
 
 const mapStateToProps = state => {
-  const { logs, isGettingLogs, page, pages } = state.log;
+  const {
+    logs,
+    isGettingLogs,
+    page,
+    pages,
+    sortCategory,
+    sortOrder
+  } = state.log;
 
   return {
     logs,
     isGettingLogs,
     page,
-    pages
+    pages,
+    sortCategory,
+    sortOrder
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleGetLogs: page => {
-      dispatch(getLogs(page));
+    handleGetLogs: (page, sortCategory, sortOrder) => {
+      dispatch(getLogs(page, sortCategory, sortOrder));
     }
   };
 };

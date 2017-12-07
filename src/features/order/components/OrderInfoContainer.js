@@ -13,7 +13,6 @@ import {
 const mapStateToProps = state => {
   const {
     order,
-    orderInfo,
     showDeleteModal,
     isGettingOrder,
     isDeletingOrder,
@@ -22,7 +21,6 @@ const mapStateToProps = state => {
 
   return {
     order,
-    orderInfo,
     showDeleteModal,
     isGettingOrder,
     isDeletingOrder,
@@ -44,8 +42,8 @@ const mapDispatchToProps = dispatch => {
     handleToggleModal: orderId => {
       dispatch(toggleModal(orderId));
     },
-    handleToggleDeleteModal: orderId => {
-      dispatch(toggleDeleteModal(orderId));
+    handleToggleDeleteModal: () => {
+      dispatch(toggleDeleteModal());
     },
     handleFormChange: (name, option) => {
       dispatch(formChange(name, option));

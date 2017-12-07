@@ -4,10 +4,21 @@ import Orders from './Orders';
 import { getOrders, toggleModal } from '../entities/order';
 
 const mapStateToProps = state => {
-  const { page, pages, orders, showModal } = state.order;
+  const {
+    page,
+    filter,
+    sortCategory,
+    sortOrder,
+    pages,
+    orders,
+    showModal
+  } = state.order;
 
   return {
     page,
+    filter,
+    sortCategory,
+    sortOrder,
     pages,
     orders,
     showModal
@@ -16,8 +27,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleGetOrders: page => {
-      dispatch(getOrders(page));
+    handleGetOrders: (page, sortCategory, sortOrder, filter) => {
+      dispatch(getOrders(page, sortCategory, sortOrder, filter));
     },
     handleToggleModal: order => {
       dispatch(toggleModal(order));

@@ -8,15 +8,26 @@ import Table from 'grommet/components/Table';
 import TableRow from 'grommet/components/TableRow';
 
 import OrderInfo from './components/OrderInfoContainer';
+import OrderSearch from './components/OrderSearchContainer';
 
 class Orders extends Component {
   componentDidMount() {
-    this.props.handleGetOrders(this.props.page);
+    this.props.handleGetOrders(
+      this.props.page,
+      this.props.sortCategory,
+      this.props.sortOrder,
+      this.props.filter
+    );
   }
 
   handleLoadMore = () => {
     if (this.props.page <= this.props.pages) {
-      this.props.handleGetOrders(this.props.page);
+      this.props.handleGetOrders(
+        this.props.page,
+        this.props.sortCategory,
+        this.props.sortOrder,
+        this.props.filter
+      );
     }
   };
 
@@ -24,8 +35,9 @@ class Orders extends Component {
     const { orders, showModal, handleToggleModal } = this.props;
     return (
       <div>
+        <h2>Orders</h2>
+        <OrderSearch />
         <div className="orderTable">
-          <h2>Orders</h2>
           {showModal && <OrderInfo />}
           <Table onMore={this.handleLoadMore}>
             <TableHeader
