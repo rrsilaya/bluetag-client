@@ -11,6 +11,7 @@ import {
 } from '../../entities/apparel';
 
 import { getStocks } from '../../entities/stock';
+import { getSales } from '../../entities/sale';
 
 const mapStateToProps = state => {
   const { apparel, activeApparel, apparelInfo, confirmDelete } = state.apparel;
@@ -45,6 +46,9 @@ const mapDispatchToProps = dispatch => {
     },
     handleGetStocks: apparel => {
       dispatch(getStocks(apparel));
+    },
+    handleGetSales: apparel => {
+      dispatch(getSales(apparel));
     }
   };
 };

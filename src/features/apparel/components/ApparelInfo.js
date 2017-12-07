@@ -11,12 +11,14 @@ import Tabs from 'grommet/components/Tabs';
 import Tab from 'grommet/components/Tab';
 
 import StockInfo from './stock/StockInfoContainer';
+import Sale from './sale/SaleContainer';
 import ConfirmDelete from './ConfirmDelete';
 
 class ApparelInfo extends Component {
   componentDidMount() {
     this.props.handleGetApparelByID(this.props.activeApparel);
     this.props.handleGetStocks(this.props.activeApparel);
+    this.props.handleGetSales(this.props.activeApparel);
   }
 
   handleToggleModal = () => {
@@ -123,7 +125,9 @@ class ApparelInfo extends Component {
           <Tab title="Stocks">
             <StockInfo />
           </Tab>
-          <Tab title="Sales" />
+          <Tab title="Sales">
+            <Sale />
+          </Tab>
         </Tabs>
       </Layer>
     );

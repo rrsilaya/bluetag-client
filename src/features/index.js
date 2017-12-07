@@ -5,6 +5,7 @@ import employee from './entities/employee';
 import apparel from './entities/apparel';
 import discount from './entities/discount';
 import stock from './entities/stock';
+import sale from './entities/sale';
 
 const root = combineReducers({
   // place all reducers here
@@ -12,7 +13,8 @@ const root = combineReducers({
   employee,
   apparel,
   discount,
-  stock
+  stock,
+  sale
 });
 
 export default root;

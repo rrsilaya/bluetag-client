@@ -9,7 +9,7 @@ import Button from 'grommet/components/Button';
 const ConfirmDelete = ({ toggleDelete, deleteItem }) => {
   return (
     <Layer>
-      <Heading>Delete Apparel</Heading>
+      <Heading>Delete Item</Heading>
       <Label>Are you sure you want to delete this item?</Label>
       <Footer pad={{ vertical: 'medium' }} justify="end">
         <Button
