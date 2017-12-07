@@ -1,6 +1,7 @@
 import Dashboard from '../features/dashboard/DashboardContainer';
 import Orders from '../features/order/OrdersContainer';
 import Apparel from '../features/apparel/ApparelContainer';
+import Logs from '../features/log/LogsContainer';
 
 const routes = [
   {
@@ -17,15 +18,15 @@ const routes = [
   },
   {
     type: 'route',
-    path: '/dashboard',
-    exact: true,
-    component: Dashboard
-  },
-  {
-    type: 'route',
     path: '/order',
     exact: true,
     component: Orders
+  },
+  {
+    type: 'route',
+    path: '/log',
+    exact: true,
+    component: Logs
   },
   {
     type: 'redirect',

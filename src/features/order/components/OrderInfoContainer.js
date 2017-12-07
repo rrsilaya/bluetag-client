@@ -5,16 +5,28 @@ import {
   deleteOrder,
   getOrder,
   editOrder,
-  toggleModal
+  toggleModal,
+  toggleDeleteModal,
+  formChange
 } from '../../entities/order';
 
 const mapStateToProps = state => {
-  const { order, isGettingOrder, isDeletingOrder } = state.order;
+  const {
+    order,
+    orderInfo,
+    showDeleteModal,
+    isGettingOrder,
+    isDeletingOrder,
+    isEditingOrder
+  } = state.order;
 
   return {
     order,
+    orderInfo,
+    showDeleteModal,
     isGettingOrder,
-    isDeletingOrder
+    isDeletingOrder,
+    isEditingOrder
   };
 };
 
@@ -29,8 +41,14 @@ const mapDispatchToProps = dispatch => {
     handleDeleteOrder: orderId => {
       dispatch(deleteOrder(orderId));
     },
-    handleToggleModal: () => {
-      dispatch(toggleModal());
+    handleToggleModal: orderId => {
+      dispatch(toggleModal(orderId));
+    },
+    handleToggleDeleteModal: orderId => {
+      dispatch(toggleDeleteModal(orderId));
+    },
+    handleFormChange: (name, option) => {
+      dispatch(formChange(name, option));
     }
   };
 };

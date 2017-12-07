@@ -4,12 +4,12 @@ import Orders from './Orders';
 import { getOrders, toggleModal } from '../entities/order';
 
 const mapStateToProps = state => {
-  const { page, orders, isGettingOrders, showModal } = state.order;
+  const { page, pages, orders, showModal } = state.order;
 
   return {
     page,
+    pages,
     orders,
-    isGettingOrders,
     showModal
   };
 };

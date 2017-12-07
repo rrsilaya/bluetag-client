@@ -1,4 +1,4 @@
-.orderTable {
+.logTable {
   height: 100px;
 }
 
@@ -7,6 +7,6 @@
   width: 100% !important;
 }
 
-.order-item {
+.log-item {
   cursor: pointer;
 }

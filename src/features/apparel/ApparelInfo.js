@@ -60,6 +60,7 @@ class ApparelInfo extends Component {
 
   handleEditApparel = e => {
     e.preventDefault();
+    console.log(this.props.apparelInfo);
     this.props.handleEditApparel(
       this.props.activeApparel,
       this.props.apparelInfo

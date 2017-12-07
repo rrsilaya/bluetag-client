@@ -8,8 +8,8 @@ export const getOrderById = id => {
   return axios.get(`/api/order/${id}`);
 };
 
-export const editOrder = (id, update) => {
-  return axios.put(`/api/order/${id}`, update);
+export const editOrder = (orderId, orderInfo) => {
+  return axios.put(`/api/order/${orderId}`, orderInfo);
 };
 
 export const deleteOrder = id => {

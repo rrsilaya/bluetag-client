@@ -7,6 +7,8 @@ const GET_ORDER = 'ORDER/GET_ORDER';
 const EDIT_ORDER = 'ORDER/EDIT_ORDER';
 const DELETE_ORDER = 'ORDER/DELETE_ORDER';
 const TOGGLE_MODAL = 'ORDER/TOGGLE_MODAL';
+const TOGGLE_DELETE_MODAL = 'ORDER/TOGGLE_DELETE_MODAL';
+const FORM_CHANGE = 'ORDER/FORM_CHANGE';
 
 // Action Creators
 export const getOrders = page => {
@@ -52,22 +54,47 @@ export const toggleModal = order => {
   };
 };
 
+export const toggleDeleteModal = order => {
+  return {
+    type: TOGGLE_DELETE_MODAL,
+    payload: order
+  };
+};
+
+export const formChange = (name, option) => {
+  return {
+    type: FORM_CHANGE,
+    payload: {
+      name,
+      option
+    }
+  };
+};
+
 const initialState = {
   page: 1,
+  pages: 0,
 
   // Get order by page
   orders: [],
-  isGettingOrders: false,
 
   // Get order by id
   order: {},
   isGettingOrder: false,
 
+  // Edit order
+  orderInfo: {
+    status: '',
+    company: ''
+  },
+  isEditingOrder: false,
+
   // Delete order
   isDeletingOrder: false,
 
-  // Modal
-  showModal: false
+  // Modals
+  showModal: false,
+  showDeleteModal: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -83,7 +110,8 @@ const reducer = (state = initialState, action) => {
         success: prevState => ({
           ...prevState,
           orders: [...state.orders, ...payload.data.data.orders],
-          page: state.page + 1
+          page: state.page + 1,
+          pages: payload.data.data.pages
         }),
         finish: prevState => ({
           ...prevState,
@@ -99,7 +127,11 @@ const reducer = (state = initialState, action) => {
         }),
         success: prevState => ({
           ...prevState,
-          order: payload.data.data
+          order: payload.data.data,
+          orderInfo: {
+            status: payload.data.data.status,
+            company: payload.data.data.company
+          }
         }),
         finish: prevState => ({
           ...prevState,
@@ -114,17 +146,37 @@ const reducer = (state = initialState, action) => {
         order: payload
       };
 
-    // case DELETE_ORDER:
-    //   return handle(state, action, {
-    //     start: prevState => ({
-    //       ...prevState,
-    //       isDeletingOrder: true
-    //     }),
-    //     success: prevState => ({
-    //       ...prevState,
-    //       orders: prevState.orders.filter
-    //     })
-    //   })
+    case TOGGLE_DELETE_MODAL:
+      return {
+        ...state,
+        showDeleteModal: !state.showDeleteModal,
+        order: payload
+      };
+
+    case FORM_CHANGE:
+      return {
+        ...state,
+        orderInfo: {
+          ...state.orderInfo,
+          [payload.name]: payload.option
+        }
+      };
+
+    case EDIT_ORDER:
+      return handle(state, action, {
+        start: prevState => ({
+          ...prevState,
+          isEditingOrder: true
+        }),
+        success: prevState => ({
+          ...prevState,
+          showModal: !prevState.showModal
+        }),
+        finish: prevState => ({
+          ...prevState,
+          isEditingOrder: false
+        })
+      });
 
     default:
       return state;
