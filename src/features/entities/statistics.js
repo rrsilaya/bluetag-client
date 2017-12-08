@@ -1,51 +1,49 @@
 import * as Api from '../api';
 import { handle } from 'redux-pack';
 
-// Actions
-const GET_EMPLOYEES = 'EMPLOYEE/GET_EMPLOYEES';
+// Action Types
+const GET_STATISTICS = 'STATISTICS/GET_STATISTICS';
 
 // Action Creators
-export const getEmployees = page => {
+export const getStatistics = () => {
   return dispatch => {
     return dispatch({
-      type: GET_EMPLOYEES,
-      promise: Api.getEmployees(page)
+      type: GET_STATISTICS,
+      promise: Api.getStatistics()
     });
   };
 };
 
-// Initial State
 const initialState = {
-  employees: [],
-
-  page: 1,
-  pages: 1,
-  isGettingEmployees: false
+  statistics: {
+    statistics: [],
+    fastMovingItems: 0,
+    slowMovingItems: 0,
+    disposalItems: 0,
+    discountedItems: 0
+  },
+  isGettingStatistics: false
 };
 
-// Reducer
 const reducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case GET_EMPLOYEES:
+    case GET_STATISTICS:
       return handle(state, action, {
         start: prevState => ({
           ...prevState,
-          isGettingEmployees: true
+          isGettingStatistics: true
         }),
         success: prevState => ({
           ...prevState,
-          employees: [...state.employees, ...payload.data.data.users],
-          page: state.page + 1,
-          pages: payload.data.data.pages
+          statistics: payload.data.data
         }),
         finish: prevState => ({
           ...prevState,
-          isGettingEmployees: false
+          isGettingStatistics: false
         })
       });
-
     default:
       return state;
   }

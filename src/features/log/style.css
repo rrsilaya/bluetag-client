@@ -1,4 +1,4 @@
-.apparelTable {
+.logTable {
   height: 100px;
 }
 
@@ -7,6 +7,6 @@
   width: 100% !important;
 }
 
-.apparel-item {
+.log-item {
   cursor: pointer;
 }

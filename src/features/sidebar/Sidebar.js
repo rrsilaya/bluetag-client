@@ -19,19 +19,19 @@ class Sidebar extends Component {
           <Menu primary>
             <Anchor
               label="Dashboard"
-              href="#"
+              path={{ path: '/', index: true }}
               icon={<DashboardIcon />}
               animateIcon={false}
             />
             <Anchor
               label="Apparel"
-              href="#"
+              path={{ path: '/apparel', index: true }}
               icon={<CoatCheckIcon />}
               animateIcon={false}
             />
             <Anchor
-              label="Stock"
-              href="#"
+              label="Orders"
+              path={{ path: '/order', index: true }}
               icon={<CompareIcon />}
               animateIcon={false}
             />
@@ -39,13 +39,13 @@ class Sidebar extends Component {
               ? [
                   <Anchor
                     label="Logs"
-                    href="#"
+                    path={{ path: '/log', index: true }}
                     icon={<DocumentTimeIcon />}
                     animateIcon={false}
                   />,
                   <Anchor
-                    label="Employees"
-                    href="#"
+                    label="Employee"
+                    path={{ path: '/employee', index: true }}
                     icon={<GroupIcon />}
                     animateIcon={false}
                   />

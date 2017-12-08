@@ -1,48 +1,43 @@
 import * as Api from '../api';
 import { handle } from 'redux-pack';
 
-// Actions
-const GET_EMPLOYEES = 'EMPLOYEE/GET_EMPLOYEES';
+//Action Types
+const GET_DISCOUNTS = 'DISCOUNT/GET_DISCOUNTS';
 
-// Action Creators
-export const getEmployees = page => {
+//Action Creators
+export const getDiscounts = apparel => {
   return dispatch => {
     return dispatch({
-      type: GET_EMPLOYEES,
-      promise: Api.getEmployees(page)
+      type: GET_DISCOUNTS,
+      promise: Api.getDiscounts(apparel)
     });
   };
 };
 
-// Initial State
+//Initial State
 const initialState = {
-  employees: [],
+  discounts: [],
 
-  page: 1,
-  pages: 1,
-  isGettingEmployees: false
+  isGettingDiscounts: false
 };
 
-// Reducer
 const reducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case GET_EMPLOYEES:
+    case GET_DISCOUNTS:
       return handle(state, action, {
         start: prevState => ({
           ...prevState,
-          isGettingEmployees: true
+          isGettingDiscounts: true
         }),
         success: prevState => ({
           ...prevState,
-          employees: [...state.employees, ...payload.data.data.users],
-          page: state.page + 1,
-          pages: payload.data.data.pages
+          discounts: payload.data.data
         }),
-        finish: prevState => ({
+        failure: prevState => ({
           ...prevState,
-          isGettingEmployees: false
+          isGettingDiscounts: false
         })
       });
 

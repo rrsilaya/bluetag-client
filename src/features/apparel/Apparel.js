@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import ApparelSearch from './ApparelSearch';
+import ApparelSearch from './components/ApparelSearchContainer';
+import ApparelInfo from './components/ApparelInfoContainer';
 
 import Table from 'grommet/components/Table';
 import TableRow from 'grommet/components/TableRow';
@@ -8,12 +9,25 @@ import TableRow from 'grommet/components/TableRow';
 import './style.css';
 
 class Apparel extends Component {
+  componentDidMount() {
+    this.props.handleGetApparel(this.props.page, this.props.searchApparel);
+  }
+
+  handleLoadMore = () => {
+    if (this.props.page <= this.props.pages) {
+      this.props.handleGetApparel(this.props.page, this.props.searchApparel);
+    }
+  };
+
   render() {
+    const { apparels, infoModal, handleToggleModal } = this.props;
+
     return (
       <div>
         <ApparelSearch />
         <div className="apparelTable">
-          <Table>
+          {infoModal && <ApparelInfo />}
+          <Table onMore={this.handleLoadMore}>
             <thead>
               <tr>
                 <th>ID</th>
@@ -23,143 +37,37 @@ class Apparel extends Component {
                 <th>Color</th>
                 <th>Quantity</th>
                 <th>Price</th>
-                <th>Discount</th>
                 <th>Selling Price</th>
               </tr>
             </thead>
             <tbody>
-              <TableRow>
-                <td>340490415894177</td>
-                <td>Rohan and Sons</td>
-                <td>underwear</td>
-                <td>XXL</td>
-                <td>black</td>
-                <td>1</td>
-                <td>2237</td>
-                <td>0%</td>
-                <td>2237.00</td>
-              </TableRow>
-              <TableRow>
-                <td>340490415894177</td>
-                <td>Rohan and Sons</td>
-                <td>underwear</td>
-                <td>XXL</td>
-                <td>black</td>
-                <td>1</td>
-                <td>2237</td>
-                <td>0%</td>
-                <td>2237.00</td>
-              </TableRow>
-              <TableRow>
-                <td>340490415894177</td>
-                <td>Rohan and Sons</td>
-                <td>underwear</td>
-                <td>XXL</td>
-                <td>black</td>
-                <td>1</td>
-                <td>2237</td>
-                <td>0%</td>
-                <td>2237.00</td>
-              </TableRow>
-              <TableRow>
-                <td>340490415894177</td>
-                <td>Rohan and Sons</td>
-                <td>underwear</td>
-                <td>XXL</td>
-                <td>black</td>
-                <td>1</td>
-                <td>2237</td>
-                <td>0%</td>
-                <td>2237.00</td>
-              </TableRow>
-              <TableRow>
-                <td>340490415894177</td>
-                <td>Rohan and Sons</td>
-                <td>underwear</td>
-                <td>XXL</td>
-                <td>black</td>
-                <td>1</td>
-                <td>2237</td>
-                <td>0%</td>
-                <td>2237.00</td>
-              </TableRow>
-              <TableRow>
-                <td>340490415894177</td>
-                <td>Rohan and Sons</td>
-                <td>underwear</td>
-                <td>XXL</td>
-                <td>black</td>
-                <td>1</td>
-                <td>2237</td>
-                <td>0%</td>
-                <td>2237.00</td>
-              </TableRow>
-              <TableRow>
-                <td>340490415894177</td>
-                <td>Rohan and Sons</td>
-                <td>underwear</td>
-                <td>XXL</td>
-                <td>black</td>
-                <td>1</td>
-                <td>2237</td>
-                <td>0%</td>
-                <td>2237.00</td>
-              </TableRow>
-              <TableRow>
-                <td>340490415894177</td>
-                <td>Rohan and Sons</td>
-                <td>underwear</td>
-                <td>XXL</td>
-                <td>black</td>
-                <td>1</td>
-                <td>2237</td>
-                <td>0%</td>
-                <td>2237.00</td>
-              </TableRow>
-              <TableRow>
-                <td>340490415894177</td>
-                <td>Rohan and Sons</td>
-                <td>underwear</td>
-                <td>XXL</td>
-                <td>black</td>
-                <td>1</td>
-                <td>2237</td>
-                <td>0%</td>
-                <td>2237.00</td>
-              </TableRow>
-              <TableRow>
-                <td>340490415894177</td>
-                <td>Rohan and Sons</td>
-                <td>underwear</td>
-                <td>XXL</td>
-                <td>black</td>
-                <td>1</td>
-                <td>2237</td>
-                <td>0%</td>
-                <td>2237.00</td>
-              </TableRow>
-              <TableRow>
-                <td>340490415894177</td>
-                <td>Rohan and Sons</td>
-                <td>underwear</td>
-                <td>XXL</td>
-                <td>black</td>
-                <td>1</td>
-                <td>2237</td>
-                <td>0%</td>
-                <td>2237.00</td>
-              </TableRow>
-              <TableRow>
-                <td>340490415894177</td>
-                <td>Rohan and Sons</td>
-                <td>underwear</td>
-                <td>XXL</td>
-                <td>black</td>
-                <td>1</td>
-                <td>2237</td>
-                <td>0%</td>
-                <td>2237.00</td>
-              </TableRow>
+              {apparels.map((apparel, index) => {
+                return (
+                  <TableRow
+                    key={index}
+                    className="apparel-item"
+                    onClick={() => handleToggleModal(apparel.id)}>
+                    <td>{apparel.id}</td>
+                    <td>{apparel.brand}</td>
+                    <td>{apparel.type}</td>
+                    <td>{apparel.size}</td>
+                    <td>{apparel.color}</td>
+                    <td>{apparel.qty}</td>
+                    <td>
+                      {apparel.price.toLocaleString('en-PH', {
+                        style: 'currency',
+                        currency: 'Php'
+                      })}
+                    </td>
+                    <td>
+                      {apparel.sellingPrice.toLocaleString('en-PH', {
+                        style: 'currency',
+                        currency: 'Php'
+                      })}
+                    </td>
+                  </TableRow>
+                );
+              })}
             </tbody>
           </Table>
         </div>
