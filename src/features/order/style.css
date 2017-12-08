@@ -1,0 +1,12 @@
+.orderTable {
+  height: 100px;
+}
+
+.searchFull,
+.searchFull input {
+  width: 100% !important;
+}
+
+.order-item {
+  cursor: pointer;
+}

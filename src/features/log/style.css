@@ -1,0 +1,12 @@
+.logTable {
+  height: 100px;
+}
+
+.searchFull,
+.searchFull input {
+  width: 100% !important;
+}
+
+.log-item {
+  cursor: pointer;
+}
