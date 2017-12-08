@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Graph from './components/Graph';
 
 import './style.css';
 
@@ -8,7 +9,11 @@ class Dashboard extends Component {
   }
 
   render() {
-    return <div />;
+    return (
+      <div>
+        <Graph statistics={this.props.statistics} />
+      </div>
+    );
   }
 }
 
