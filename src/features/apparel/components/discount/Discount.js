@@ -10,7 +10,7 @@ import '../../style.css';
 
 class Discount extends Component {
   render() {
-    const { activeApparel, discounts } = this.props;
+    const { discounts } = this.props;
 
     return (
       <div>

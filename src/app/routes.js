@@ -1,4 +1,5 @@
 import Apparel from '../features/apparel/ApparelContainer';
+import Employee from '../features/employee/EmployeeContainer';
 
 const routes = [
   {
@@ -11,6 +12,12 @@ const routes = [
     path: '/apparel',
     exact: true,
     component: Apparel
+  },
+  {
+    type: 'route',
+    path: '/employee',
+    exact: true,
+    component: Employee
   },
   {
     type: 'redirect',
